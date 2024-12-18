@@ -6,8 +6,6 @@ import { OrdemServico } from './OrdemServico.js'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-
-  <OrdemServico />
-
+    <OrdemServico />
   </StrictMode>,
 )

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { HeaderComponent } from './Header.tsx'
 
 export const OrdemServico = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export const OrdemServico = () => {
     descricaoProblema: '',
     reparoRealizado: '',
     status: '',
+    nome: '',
     dataInicio: '',
     dataConclusao: '',
   });
@@ -23,8 +25,25 @@ export const OrdemServico = () => {
   
   const handleCloseModal = () => setShowModal(false);
 
+  const cleanFields = () => {
+    setFormData({
+      equipamento: '',
+      numeroSerie: '',
+      descricaoProblema: '',
+      reparoRealizado: '',
+      status: '',
+      nome: '',
+      dataInicio: '',
+      dataConclusao: '',
+    });
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const next = confirm('Confirme para imprimir.');
+
+    if(next === false){ return }
 
     try {
       const response = await axios.post('http://localhost:3000/api/ordemdeservico', formData);
@@ -38,11 +57,14 @@ export const OrdemServico = () => {
         descricaoProblema: '',
         reparoRealizado: '',
         status: '',
+        nome: '',
         dataInicio: '',
         dataConclusao: '',
       });
 
     } catch (error) {
+
+      alert('Erro ao criar nota, verifique com o administrador.')
       console.error('Erro ao enviar a ordem de serviço:', error);
     }
   };
@@ -50,24 +72,26 @@ export const OrdemServico = () => {
 
   const imprime = () => {
     const elements = document.querySelectorAll('.no-print');
-    elements.forEach(element => { element.style.display = 'none' }); // Oculta botões na impressão
+    elements.forEach(element => { element.style.display = 'none' }); 
 
     window.print();
     
-    // Após a impressão, restaura a exibição dos botões
     elements.forEach(element => { element.style.display = 'block' });
   }
 
   return (
-    <Container className='mt-5'>
-      {/* Renderiza o formulário apenas se o modal não estiver aberto */}
+
+     
+
+    <Container className='mt-2'>
+      <HeaderComponent /> 
       {!showModal && (
         <Row>
           <Col md={6} className="offset-md-3">
             <h2>Ordem de Serviço</h2>
             <Form onSubmit={handleSubmit}>
 
-              <Form.Group controlId="formEquipamento">
+              <Form.Group controlId="formEquipamento" className='mb-2'>
                 <Form.Label>Equipamento</Form.Label>
                 <Form.Control
                   type="text"
@@ -78,7 +102,7 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formNumeroSerie">
+              <Form.Group controlId="formNumeroSerie" className='mb-2'>
                 <Form.Label>Número de Série</Form.Label>
                 <Form.Control
                   type="text"
@@ -89,7 +113,7 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formDescricaoProblema">
+              <Form.Group controlId="formDescricaoProblema" className='mb-2'>
                 <Form.Label>Descrição do Problema</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -100,7 +124,7 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formReparoRealizado">
+              <Form.Group controlId="formReparoRealizado" className='mb-2'>
                 <Form.Label>Reparo Realizado</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -110,7 +134,7 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formStatus">
+              <Form.Group controlId="formStatus" className='mb-2'>
                 <Form.Label>Status</Form.Label>
                 <Form.Control
                   type="text"
@@ -120,7 +144,18 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formDataInicio">
+              <Form.Group controlId="formStatus" className='mb-2'>
+                <Form.Label>Nome do Responsável</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="nome"
+                  value={formData.nome}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formDataInicio" className='mb-2'>
                 <Form.Label>Data de Início</Form.Label>
                 <Form.Control
                   type="date"
@@ -131,7 +166,7 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formDataConclusao">
+              <Form.Group controlId="formDataConclusao" className='mb-2'>
                 <Form.Label>Data de Conclusão</Form.Label>
                 <Form.Control
                   type="date"
@@ -141,15 +176,22 @@ export const OrdemServico = () => {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className='mt-2'>
+              <div className='mt-3 mb-2 d-flex flex-row-reverse gap-2'>              
+              <Button variant="primary" type="submit" >
                 Salvar
               </Button>
+              <Button variant='warning' className='' onClick={cleanFields}>
+                Limpar
+              </Button>
+              </div>
             </Form>
           </Col>
+
+          
         </Row>
+        
       )}
 
-      {/* Modal para exibir a Nota */}
       {showModal && (
         <Modal
           show={showModal}
@@ -168,13 +210,13 @@ export const OrdemServico = () => {
                 <p><strong>Descrição do Problema:</strong> {nota.descricaoProblema}</p>
                 <p><strong>Reparo Realizado:</strong> {nota.reparoRealizado}</p>
                 <p><strong>Status:</strong> {nota.status}</p>
+                <p><strong>Status:</strong> {nota.nome}</p>
                 <p><strong>Data de Início:</strong> {nota.dataInicio}</p>
                 <p><strong>Data de Conclusão:</strong> {nota.dataConclusao}</p>
               </>
             )}
           </Modal.Body>
           <Modal.Footer>
-            {/* Botões de Fechar e Imprimir */}
             <Button
               variant="secondary"
               onClick={handleCloseModal}
@@ -193,6 +235,8 @@ export const OrdemServico = () => {
           </Modal.Footer>
         </Modal>
       )}
+      <footer className="bg-primary variant-dark p-1 m-2">
+      </footer>
     </Container>
   );
 };
