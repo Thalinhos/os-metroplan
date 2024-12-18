@@ -1,5 +1,5 @@
 import express from 'npm:express';
-import { promisses as fs } from 'node:fs';
+import { promises as fs } from 'node:fs';
 import cors from 'npm:cors';
 
 const app = express();
