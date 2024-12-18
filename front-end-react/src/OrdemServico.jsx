@@ -46,7 +46,7 @@ const OrdemServico = () => {
     if(next === false){ return }
 
     try {
-      const response = await axios.post('https://os-metroplan.deno.dev/api/ordemdeservico', formData);
+      const response = await axios.post('http://localhost:3000/api/ordemdeservico', formData);
       setNota(response.data); 
       
       setShowModal(true);
@@ -64,7 +64,7 @@ const OrdemServico = () => {
 
     } catch (error) {
 
-      alert('Erro ao criar nota, verifique com o administrador.')
+      alert('Erro ao criar nota, verifique com o administrador.' + error)
       console.error('Erro ao enviar a ordem de serviço:', error);
     }
   };
