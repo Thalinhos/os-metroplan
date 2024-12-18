@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
-import { HeaderComponent } from './Header.tsx'
+import { HeaderComponent } from './Header.jsx'
 
-export const OrdemServico = () => {
+const OrdemServico = () => {
   const [formData, setFormData] = useState({
     equipamento: '',
     numeroSerie: '',
@@ -244,3 +244,6 @@ export const OrdemServico = () => {
     </Container>
   );
 };
+
+
+export default OrdemServico;

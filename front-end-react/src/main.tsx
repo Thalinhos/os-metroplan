@@ -1,11 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { OrdemServico } from './OrdemServico.js'
+import  OrdemServico  from './OrdemServico.jsx'
 
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <OrdemServico />
-  </StrictMode>,
-)
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <OrdemServico />
+    </StrictMode>,
+  );
+} else {
+  console.error('Elemento root não encontrado!');
+}
