@@ -1,5 +1,5 @@
 import express from 'npm:express';
-import { promisses as fs } from 'node:fs';
+import { promises as fs } from 'node:fs';
 import cors from 'npm:cors';
 
 const app = express();
@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static('dist'))
+app.use(express.static('public'))
 
 app.post('/api/ordemdeservico', async (req, res) => {
 
