@@ -84,8 +84,10 @@ export const OrdemServico = () => {
      
 
     <Container className='mt-2'>
-      <HeaderComponent /> 
       {!showModal && (
+      <div>
+      <HeaderComponent /> 
+
         <Row>
           <Col md={6} className="offset-md-3">
             <h2>Ordem de Serviço</h2>
@@ -189,6 +191,9 @@ export const OrdemServico = () => {
 
           
         </Row>
+        <footer className="bg-primary variant-dark p-1 m-2 no-print">
+        </footer>
+        </div>
         
       )}
 
@@ -235,8 +240,7 @@ export const OrdemServico = () => {
           </Modal.Footer>
         </Modal>
       )}
-      <footer className="bg-primary variant-dark p-1 m-2">
-      </footer>
+   
     </Container>
   );
 };

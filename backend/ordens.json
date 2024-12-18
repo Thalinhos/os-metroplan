@@ -1,0 +1,32 @@
+[
+  {
+    "equipamento": "equipamento",
+    "numeroSerie": "123456",
+    "descricaoProblema": "nao liga",
+    "reparoRealizado": "",
+    "status": "",
+    "nome": "thalisson",
+    "dataInicio": "2024-12-18",
+    "dataConclusao": ""
+  },
+  {
+    "equipamento": "teste",
+    "numeroSerie": "123456",
+    "descricaoProblema": "nao liga",
+    "reparoRealizado": "",
+    "status": "",
+    "nome": "thalisson",
+    "dataInicio": "2024-12-18",
+    "dataConclusao": ""
+  },
+  {
+    "equipamento": "teste",
+    "numeroSerie": "easdw",
+    "descricaoProblema": "teasdwa",
+    "reparoRealizado": "",
+    "status": "",
+    "nome": "tasdwas",
+    "dataInicio": "2024-12-18",
+    "dataConclusao": ""
+  }
+]

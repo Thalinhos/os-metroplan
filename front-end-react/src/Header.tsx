@@ -17,7 +17,7 @@ export const HeaderComponent = () => {
             }
         </style>
 
-            <div>
+            <div className='no-print'>
                 <header className="bg-white text-center">
                     <Container>
                         <Row className="justify-content-center align-items-center">
